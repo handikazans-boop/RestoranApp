@@ -1,10 +1,28 @@
 public class Makanan extends MenuItem {
 
-public Makanan(String nama, double harga) {
-super(nama, harga, kategori: "Makanan");
+    private String jenisMakanan;
 
-@override
-public void tampilMenu() {
-System.out.println(nama +" - Rp" + harga +" (Makanan)");
+    public Makanan(String nama, double harga, String jenisMakanan) {
+        super(nama, harga, "Makanan");
+        this.jenisMakanan = periksaTeks(jenisMakanan, "Jenis makanan");
+    }
 
+    public String getJenisMakanan() {
+        return jenisMakanan;
+    }
+
+    public void setJenisMakanan(String jenisMakanan) {
+        this.jenisMakanan = periksaTeks(jenisMakanan, "Jenis makanan");
+    }
+
+    @Override
+    public void tampilMenu() {
+        System.out.println(getNama() + " - " + rp(getHarga())
+                + "  [Jenis: " + jenisMakanan + "]");
+    }
+
+    @Override
+    public String keBarisFile() {
+        return "Makanan;" + getNama() + ";" + angkaFile(getHarga()) + ";" + jenisMakanan;
+    }
 }
